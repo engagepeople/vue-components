@@ -1,0 +1,58 @@
+{
+  "name": "podium-client-components",
+  "version": "0.0.1",
+  "description": "Podium Client Components Library",
+  "keywords": [
+    "loyalty",
+    "reward",
+    "incentive",
+    "recognition",
+    "engagement",
+    "promotion",
+    "redemption",
+    "vue.js"
+  ],
+  "author": "Dan Shreim <dshreim@engagepeople.com>",
+  "private": false,
+  "license": "Apache-2.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "webpack",
+    "dev": "webpack --watch",
+    "lint": "tslint -c tslint.json src/*/**.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/engagepeople/podium-client-components.git"
+  },
+  "files": [
+    "dist/*.js",
+    "types/*.d.ts"
+  ],
+  "types": "./types/index.d.ts",
+  "devDependencies": {
+    "css-loader": "^0.28.11",
+    "pug": "^2.0.3",
+    "pug-plain-loader": "^1.0.0",
+    "ts-loader": "^2.0.3",
+    "tslint": "^5.9.1",
+    "tslint-loader": "^3.6.0",
+    "typescript": "^2.3.2",
+    "vue-loader": "^12.0.3",
+    "vue-template-compiler": "^2.5.16",
+    "webpack": "^2.5.0"
+  },
+  "dependencies": {
+    "vue": "^2.5.16"
+  },
+  "engines": {
+    "node": ">= 4.0.0",
+    "npm": ">= 3.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
+}
