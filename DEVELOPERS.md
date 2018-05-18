@@ -3,18 +3,16 @@
 ## Settings up Environment
 
 To used the source code
-- Run `npm dev` from the `podium-admin-sdk` folder to start TS watch 
-- Run `npm link` from the `podium-admin-sdk` `package.json` folder  
-- Run `npm link podium-admin-sdk` from the package you are developing in
+- Run `npm dev` from the `podium-vue-components` folder to start TS watch 
+- Run `npm link` from the `podium-vue-components` `package.json` folder  
+- Run `npm link `podium-vue-components`  from the package you are developing in
 
 - Restart of your dev server maybe required
 
-## Adding new API Calls
-
-With addition to every call; make sure each call is 
-- Unit Tested in `/test/*.spec.js`
-- Documented in `README.md`
-- Type defined in `types/*`
+## Adding new Components
+ - Update Demo site
+ - Update README
+ - Update Tests
 
 ## Release Checklist
 
