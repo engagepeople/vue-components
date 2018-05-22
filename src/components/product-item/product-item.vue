@@ -48,6 +48,7 @@
         .mb-0(v-if='hasRange') Starting from
         h4.primary.mb-0(v-text='price')
         div(v-text='currency')
+        div   p 70 = {{ 70 | currency }}
 </template>
 <style scoped>
     .border {

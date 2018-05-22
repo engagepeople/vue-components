@@ -23,6 +23,6 @@ To used the source code
 - Run `npm version` [major | minor | patch | premajor | preminor | prepatch | prerelease | from-git]
 - Run `git push`
 - Run `npm publish`
-- Verify latest version on https://www.npmjs.com/package/podium-admin-sdk
+- Verify latest version on https://www.npmjs.com/package/podium-vue-components
 - Merge PR
 - Create Github version

@@ -24,7 +24,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/engagepeople/podium-client-components.git"
+    "url": "git+https://github.com/engagepeople/podium-vue-components.git"
   },
   "files": [
     "dist/*.js",

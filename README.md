@@ -20,7 +20,7 @@ Vue.use(PodiumVueComponents)
 ### pd-alert
 ### pd-badge-count
 ### pd-media-block
-### pd-product-item
+### pd-product-item****
 
 ## Filters
 ### number
