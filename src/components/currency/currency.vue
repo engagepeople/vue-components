@@ -1,12 +1,26 @@
 <script>
   import Utils from './../../utils'
+  import NumberFormat from './../../filters/NumberFormat'
 
   const utils = Utils.Instance
   export default {
     name: 'pd-currency',
+    computed: {
+      build () {
+        const amount = NumberFormat(this.amount, this.currency.precision)
+        let payload = ''
+        if (amount) {
+          payload += amount
+        }
+        if (this.showLabel) {
+          if (payload !== '') payload += ' '
+          payload += this.currency.name
+        }
+        return payload
+      }
+    },
     data () {
       return {
-        count: 1,
         currency:  utils.getCurrency()
       }
     },
@@ -24,7 +38,5 @@
   }
 </script>
 <template lang="pug">
-    span.currency
-            span.mr-1(v-if="amount") {{ amount | number(currency.precision)}}
-            span(v-if="showLabel") {{ currency.name }}
+    span.pd-currency(v-text='build')
 </template>

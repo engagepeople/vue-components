@@ -47,7 +47,7 @@
         .mb-0(v-if='hasRange') Starting from
         h4.primary.mb-0
             pd-currency(:amount="price", :show-label="false")
-        pd-currency(:amount="price", :show-amount="false")
+        pd-currency()
         hr
 
 
