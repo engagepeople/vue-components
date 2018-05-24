@@ -5,6 +5,7 @@ import pdCurrency from './components/currency/currency.vue'
 import pdDate from './components/date/date.vue'
 import pdProductItem from './components/product-item/product-item.vue'
 import pdMediaBlock from './components/media-block/media-block.vue'
+import typeahead from './components/typeahead/typeahead.vue'
 import dateFormat from './filters/DateFormatFilter'
 import numberFormat from './filters/NumberFormat'
 import Utils from './utils'
@@ -20,6 +21,7 @@ const PodiumComponents = {
         Vue.component('pd-date', pdDate)
         Vue.component('pd-media-block', pdMediaBlock)
         Vue.component('pd-product-item', pdProductItem)
+        Vue.component('pd-typeahead', typeahead)
         Vue.filter('date', dateFormat)
         Vue.filter('number', numberFormat)
 
