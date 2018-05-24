@@ -15,12 +15,3 @@ import PodiumVueComponents from 'podium-vue-components'
 Vue.use(PodiumVueComponents)
 
 ``` 
-
-## Components
-### pd-alert
-### pd-badge-count
-### pd-media-block
-### pd-product-item****
-
-## Filters
-### number
