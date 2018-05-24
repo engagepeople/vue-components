@@ -1,6 +1,6 @@
 {
   "name": "podium-vue-components",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Podium Client Components Library",
   "keywords": [
     "loyalty",
@@ -44,6 +44,7 @@
     "webpack": "^2.5.0"
   },
   "dependencies": {
+    "dateformat": "^3.0.3",
     "vue": "^2.5.16"
   },
   "engines": {

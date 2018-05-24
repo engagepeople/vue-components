@@ -14,7 +14,6 @@
     props: {
       badge: {type: String},
       brand: {type: String},
-      currency: {type: String},
       image: {
         required: true,
         type: String,
@@ -46,9 +45,12 @@
         h6.mb-0(v-text='brand')
         h6.text-primary.truncate(v-text='title')
         .mb-0(v-if='hasRange') Starting from
-        h4.primary.mb-0(v-text='price')
-        div(v-text='currency')
-        div   p 70 = {{ 70 | currency }}
+        h4.primary.mb-0
+            pd-currency(:amount="price", :show-label="false")
+        pd-currency()
+        hr
+
+
 </template>
 <style scoped>
     .border {
