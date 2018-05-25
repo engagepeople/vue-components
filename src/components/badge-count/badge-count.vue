@@ -18,11 +18,11 @@
     }
 </script>
 <template lang="pug">
-    span.badge-indicator(v-if="_count !==0") {{ _count }}
+    span.pd-badge-count(v-if="_count !==0") {{ _count }}
         span(v-if="_count == 99") +
 </template>
 <style scoped>
-    .badge-indicator {
+    .pd-badge-count {
         display: inline-block;
         background: #ec1c24;
         width: 23px;

@@ -14,7 +14,7 @@
   }
 </script>
 <template lang="pug">
-    div
+    div.pd-alert
         .mb-4
             div.alert.alert-primary.mt-5.mb-0(role="alert", :class="`alert-${this.variant}`")
                 h3.alert-heading.mb-2.text-center
