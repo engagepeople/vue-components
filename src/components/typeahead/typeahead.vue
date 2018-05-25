@@ -128,7 +128,7 @@
                 this.filterKeys.forEach(key => {
                     const stringKey = String(item[key]).toLowerCase();
                     if (stringKey.indexOf(this.query.toLowerCase()) > -1) {
-                        rez += `${key}: ${item[key]}`
+                        rez += `${key}: ${item[key]}. `
                     }
                 })
                 return rez;
