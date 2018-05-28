@@ -20,9 +20,7 @@
                 h5(v-text="title")
                 p(v-text="description")
                 div
-                    pd-date(:date="date")
-
-
+                    pd-time-ago(:date="date")
 </template>
 <style scoped>
 img {
