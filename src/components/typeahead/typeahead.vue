@@ -39,13 +39,22 @@
             return {
                 filteredItems: undefined,
                 query: '',
+                itemsWithIds: [],
                 results: [],
-                focused: false
+                focused: false,
+                warnedAbout: [] // prevents multiple identical warnings
+            }
+        },
+        watch: {
+            items: function() {
+                if (this.items) {
+                    this.itemsWithIds = this.assignItemsUIDs(this.items)
+                }
+
             }
         },
         mounted() {
             this.reset()
-            this.assignItemsUIDs()
         },
         methods: {
             reset() {
@@ -94,23 +103,27 @@
                 return S4()+S4();
             },
             assignItemsUIDs(items) {
-                items = items.forEach(e => e[UID_key] = this.guidGenerator())
+                items.forEach(e => e[UID_key] = this.guidGenerator())
+                return items
             },
             filterItems() {
                 let selectedUIDs,
-                    toFilter = this.items
+                    toFilter = this.itemsWithIds
                 if (this.multiSelect) {
                     // filter out already selected items
                     if (this.results.length) {
                         selectedUIDs = this.results.map(e => e[UID_key])
-                        toFilter = this.items.filter(item => selectedUIDs.indexOf(item[UID_key]) === -1)
+                        toFilter = this.itemsWithIds.filter(item => selectedUIDs.indexOf(item[UID_key]) === -1)
                     }
                 }
                 this.filteredItems = toFilter.filter(item => {
                     let match = false
                     this.filterKeys.forEach(key => {
                         if (!getProp(item, key)) {
-                            console.error(`Seems like property you passed down ${this.filterKeys} doesn't exist on object ! `)
+                            if (this.warnedAbout.indexOf(key) === -1) {
+                                console.warn(`Property [${key}] doesn't exist on some of the objects in the set.`)
+                                this.warnedAbout.push(key)
+                            }
                             return
                         }
                         if (String(getProp(item, key))
@@ -143,7 +156,7 @@
                     return this.filteredItems.length < 1
                 }
 
-            }
+            },
         },
     }
 </script>
