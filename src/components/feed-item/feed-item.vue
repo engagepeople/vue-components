@@ -12,6 +12,7 @@
       },
     },
   }
+
 </script>
 <template lang="pug">
     div.media.pd-feed-item.border-bottom.border-light
