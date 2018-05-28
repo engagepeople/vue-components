@@ -4,6 +4,7 @@
     props: {
       description: {type: String},
       date: {type: Date},
+      unread: {type: Boolean, default: false, required: false},
       title: {type: String},
       image: {
         required: false,
@@ -13,19 +14,49 @@
   }
 </script>
 <template lang="pug">
-    div.media.pd-feed-item.mb-3
-        img.mr-3(:src='image')
+    div.media.pd-feed-item.border-bottom.border-light
+        span.new.bg-primary.rounded-circle(:class='{unread: unread}')
+        .image.mr-3.ml-3(:style='`background-image:url(${image})`')
         .media-body
             slot
                 h5(v-text="title")
                 p(v-text="description")
                 div
-                    pd-date(:date="date")
-
-
+                    small
+                        pd-time-ago.text-dark(:date="date")
 </template>
 <style scoped>
-img {
-    width: 150px;
-}
+    .image {
+        width: 100px;
+        height: 100px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+
+    }
+
+    p {
+        min-height: 37px
+    }
+
+    .media {
+        padding-bottom: 18px;
+        margin-bottom: 20px;
+    }
+
+    .new {
+        margin-top: 40px;
+        width: 12px;
+        height: 12px;
+        visibility: hidden;
+    }
+
+    .new.unread {
+        visibility: visible;
+    }
+
+    img {
+        width: 100px;
+        height: 100px;
+    }
 </style>

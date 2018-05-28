@@ -14,7 +14,7 @@
     div.mb-5.pd-grid-item
         .border.mb-3
             .pd-badge.bg-primary(v-text='badge', v-if="badge")
-            div.image(:style='`background-image:url(${image})`')
+            .image(:style='`background-image:url(${image})`')
             slot(name="image")
         slot
 
