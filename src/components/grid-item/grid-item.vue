@@ -4,7 +4,7 @@
     props: {
       badge: {type: String},
       image: {
-        required: false,
+        required: true,
         type: String,
       },
     },
