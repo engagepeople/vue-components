@@ -13,7 +13,7 @@
 <template lang="pug">
     div.mb-5.pd-grid-item
         .border.mb-3
-            .pd-badge.bg-primary(v-text='badge', v-if="badge")
+            .pd-badge.bg-primary(v-text='badge', v-if="badge", :title="badge")
             .image(:style='`background-image:url(${image})`')
             slot(name="image")
         slot
@@ -22,7 +22,7 @@
 <style scoped>
     .image {
         width: 100%;
-        padding-top: 100%; /* 4:3 Aspect Ratio */
+        padding-top: 100%;
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center center;
@@ -38,6 +38,10 @@
         top: 0;
         right: 0;
         padding: 2px 5px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100%;
     }
 
 </style>

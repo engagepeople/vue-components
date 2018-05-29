@@ -49,9 +49,6 @@
                 pd-currency(:amount="price", :show-label="false")
             pd-currency()
 
-
-
-
 </template>
 <style scoped>
     .truncate {
