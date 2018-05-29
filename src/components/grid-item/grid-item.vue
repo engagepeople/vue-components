@@ -12,8 +12,8 @@
 </script>
 <template lang="pug">
     div.mb-5.pd-grid-item
-        .border.mb-3
-            .pd-badge.bg-primary(v-text='badge', v-if="badge", :title="badge")
+        .border.border-light.mb-3
+            .pd-badge.bg-primary.text-white(v-text='badge', v-if="badge", :title="badge")
             .image(:style='`background-image:url(${image})`')
             slot(name="image")
         slot
@@ -34,7 +34,6 @@
     .pd-badge {
         display: inline;
         position: absolute;
-        color: #fff;
         top: 0;
         right: 0;
         padding: 2px 5px;

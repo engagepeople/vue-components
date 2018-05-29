@@ -40,7 +40,7 @@
         pd-grid-item(:image="heroImage", :badge='badge')
             template(slot='image')
                 .crop-panel(v-if="swatches")
-                    .swatch(v-for="(i) in swatches", @mouseover="heroImage = i.image", :style='`background-color:${i.color}`')
+                    .swatch.border.border-light(v-for="(i) in swatches", @mouseover="heroImage = i.image", :style='`background-color:${i.color}`')
 
             h6.mb-0(v-text='brand')
             h6.text-primary.truncate(v-text='title')
@@ -60,18 +60,15 @@
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
     }
-
     .crop-panel {
         position: absolute;
         bottom: -8px;
         padding: 10px;
         width: 100%;
     }
-
     .crop-panel:hover {
         background-color: rgba(84, 84, 84, 0.18);
     }
-
     .swatch {
         cursor: pointer;
         position: relative;
@@ -79,7 +76,6 @@
         margin-right: 5px;
         width: 20px;
         height: 20px;
-        border: 1px solid #aaa;
     }
 
 </style>

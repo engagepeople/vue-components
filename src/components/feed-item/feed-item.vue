@@ -16,7 +16,7 @@
 </script>
 <template lang="pug">
     div.media.pd-feed-item.border-bottom.border-light
-        span.new.bg-primary.rounded-circle(:class='{unread: unread}')
+        span.new.bg-primary.rounded-circle(:class='{invisible: !unread}')
         .image.mr-3.ml-3(:style='`background-image:url(${image})`')
         .media-body
             slot
@@ -33,29 +33,19 @@
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center center;
-
     }
-
     p {
         min-height: 37px
     }
-
     .media {
         padding-bottom: 18px;
         margin-bottom: 20px;
     }
-
     .new {
         margin-top: 40px;
         width: 12px;
         height: 12px;
-        visibility: hidden;
     }
-
-    .new.unread {
-        visibility: visible;
-    }
-
     img {
         width: 100px;
         height: 100px;
