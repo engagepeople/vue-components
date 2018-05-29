@@ -18,22 +18,16 @@
     }
 </script>
 <template lang="pug">
-    span.badge-indicator(v-if="_count !==0") {{ _count }}
+    span.pd-badge-count.text-white.bg-danger.rounded-circle.border.border-white.text-center(v-if="_count !==0") {{ _count }}
         span(v-if="_count == 99") +
 </template>
 <style scoped>
-    .badge-indicator {
+    .pd-badge-count {
         display: inline-block;
-        background: #ec1c24;
-        width: 23px;
-        height: 23px;
-        border-radius: 20px;
-        color: white;
-        text-align: center;
+        width: 24px;
+        height: 24px;
         line-height: 1.6;
         font-size: 0.8rem;
-        padding: 0;
-        padding-top: 2px;
-        border: 1px solid white;
+        padding: 2px 0 0 0;
     }
 </style>
