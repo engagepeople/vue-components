@@ -21,7 +21,7 @@
                     img.mr-3(src='/static/images/icons/alert.svg', v-if="variant === 'warning'")
                     img.mr-3(src='/static/images/icons/check.svg', v-if="variant === 'success'")
                     span(v-text='title')
-            .link.text-center.px-4.py-3.border-top-0(:class="`alert-${this.variant}`", v-if="$slots.default")
+            .link.text-center.px-4.py-3.bg-white.border-top-0(:class="`alert-${this.variant}`", v-if="$slots.default")
                 slot
 </template>
 <style scoped>
@@ -29,7 +29,6 @@
         width: 40px;
     }
     .link.alert-success, .link.alert-warning{
-        background: white;
         border-width: 1px;
         border-style: solid;
     }
