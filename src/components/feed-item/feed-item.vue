@@ -15,8 +15,8 @@
 
 </script>
 <template lang="pug">
-    div.media.pd-feed-item.border-bottom.border-light
-        span.new.bg-primary.rounded-circle(:class='{invisible: !unread}')
+    div.pd-feed-item.media.border-bottom.border-light
+        span.unread.bg-primary.rounded-circle(:class='{invisible: !unread}')
         .image.mr-3.ml-3(:style='`background-image:url(${image})`')
         .media-body
             slot
@@ -27,6 +27,10 @@
                         pd-time-ago.text-dark(:date="date")
 </template>
 <style scoped>
+    .pd-feed-item {
+        padding-bottom: 18px;
+        margin-bottom: 20px;
+    }
     .image {
         width: 100px;
         height: 100px;
@@ -37,11 +41,7 @@
     p {
         min-height: 37px
     }
-    .media {
-        padding-bottom: 18px;
-        margin-bottom: 20px;
-    }
-    .new {
+    .unread {
         margin-top: 40px;
         width: 12px;
         height: 12px;

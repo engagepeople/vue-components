@@ -13,16 +13,15 @@
 <template lang="pug">
     div.mb-5.pd-grid-item
         .border.border-light.mb-3
-            .pd-badge.bg-primary.text-white(v-text='badge', v-if="badge", :title="badge")
-            .image(:style='`background-image:url(${image})`')
+            .pd-grid-badge.bg-primary.text-white(v-text='badge', v-if="badge", :title="badge")
+            img(:style='`background-image:url(${image})`', src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==")
             slot(name="image")
         slot
 
 </template>
 <style scoped>
-    .image {
+    img {
         width: 100%;
-        padding-top: 100%;
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center center;
@@ -31,7 +30,7 @@
         position: relative;
         overflow: hidden;
     }
-    .pd-badge {
+    .pd-grid-badge {
         display: inline;
         position: absolute;
         top: 0;
