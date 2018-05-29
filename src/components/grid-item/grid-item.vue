@@ -34,5 +34,4 @@
         padding: 2px 5px;
         max-width: 100%;
     }
-
 </style>
