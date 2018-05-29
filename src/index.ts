@@ -3,11 +3,16 @@ import pdAlert from './components/alert/alert.vue'
 import pdBadgeCount from './components/badge-count/badge-count.vue'
 import pdCurrency from './components/currency/currency.vue'
 import pdDate from './components/date/date.vue'
+import pdFeedItem from './components/feed-item/feed-item.vue'
+import pdGridItem from './components/grid-item/grid-item.vue'
+import pdMediaBlock from './components/media-block/media-block.vue'
 import pdProductItem from './components/product-item/product-item.vue'
 import pdMediaBlock from './components/media-block/media-block.vue'
 import typeahead from './components/typeahead/typeahead.vue'
+import pdTimeAgo from './components/time-ago/time-ago.vue'
 import dateFormat from './filters/DateFormatFilter'
 import numberFormat from './filters/NumberFormat'
+import TimeAgo from './filters/TimeAgo'
 import Utils from './utils'
 import {ICurrency} from '../types'
 
@@ -19,11 +24,15 @@ const PodiumComponents = {
         Vue.component('pd-badge-count', pdBadgeCount)
         Vue.component('pd-currency', pdCurrency)
         Vue.component('pd-date', pdDate)
+        Vue.component('pd-feed-item', pdFeedItem)
+        Vue.component('pd-grid-item', pdGridItem)
         Vue.component('pd-media-block', pdMediaBlock)
         Vue.component('pd-product-item', pdProductItem)
         Vue.component('pd-typeahead', typeahead)
+        Vue.component('pd-time-ago', pdTimeAgo)
         Vue.filter('date', dateFormat)
         Vue.filter('number', numberFormat)
+        Vue.filter('timeago', TimeAgo)
 
         Vue.mixin({
             beforeCreate(): void {
