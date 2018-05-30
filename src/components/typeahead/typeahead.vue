@@ -86,6 +86,7 @@
             },
             onInput() {
                 this.setFilteredItems()
+                this.$emit('onInput', this.query)
             },
             onKeydown({key}) {
                 if (getProp(this, 'filteredItems.length') && this.focused) {
