@@ -42,7 +42,8 @@
                 itemsWithIds: [],
                 results: [],
                 focused: false,
-                warnedAbout: [] // prevents multiple identical warnings
+                warnedAbout: [], // prevents multiple identical warnings
+                highlightedIndex: -1,
             }
         },
         watch: {
@@ -53,13 +54,7 @@
 
             }
         },
-        mounted() {
-            this.reset()
-        },
         methods: {
-            reset() {
-                this.query = ''
-            },
             emitResult() {
                 if (this.multiSelect) {
                     this.$emit('input', this.results)
@@ -76,6 +71,7 @@
                 }
                 this.emitResult()
                 this.query = ''
+                this.highlightedIndex = -1
             },
             removeFromResults(key){
                 this.results.splice(key, 1)
@@ -90,6 +86,26 @@
             },
             onInput() {
                 this.setFilteredItems()
+            },
+            onKeydown({key}) {
+                if (getProp(this, 'filteredItems.length') && this.focused) {
+                    switch (key) {
+                        case 'ArrowUp':
+                            if (this.highlightedIndex > 0) {
+                                this.highlightedIndex --
+                            }
+                            break;
+                        case 'ArrowDown':
+                            if (this.highlightedIndex < this.filteredItems.length-1) {
+                                this.highlightedIndex ++
+                            }
+                            break;
+                        case 'Enter':
+                            this.selectItem(this.filteredItems[this.highlightedIndex])
+                            this.$refs['input'].blur()
+                            break;
+                    }
+                }
             },
             setFilteredItems(){
                 if (this.query.length >= this.startAt) {
@@ -134,6 +150,13 @@
                     })
                     return match
                 })
+
+                if (!this.filteredItems.length) {
+                    this.highlightedIndex = -1
+                }
+                if (this.highlightedIndex > this.filteredItems.length - 1) {
+                    this.highlightedIndex = this.filteredItems.length - 1
+                }
             },
 
             defaultResultSlotMarkup(item) {
@@ -161,46 +184,35 @@
     }
 </script>
 <template lang="pug">
-    section
-        .input-results-continer
-            .result-block(v-for="(item, key) in results", :key="key")
+    .pd-typeahed
+        .border.border-light.p-1.d-flex.flex-wrap
+            .result-block.bg-primary.text-white.py-1.px-3.m-1.d-flex.align-items-center(v-for="(item, key) in results", :key="key")
                 .label {{ $scopedSlots['result-text']({item})[0].text }}
                 .delete(@click="removeFromResults(key)") ×
-            input.search-input(
+            input.border-0.ml-1(
                 ref="input",
                 type="text",
                 @input="onInput",
                 @focus="onFocus",
                 @blur="onBlur",
+                @keydown="onKeydown",
                 :placeholder="placeholder",
                 v-model="query"
             )
         section(v-if="focused")
-            transition-group.Results(name="fade", tag="ul")
-                li(v-for="(item, key) in filteredItems", :key="key", @mousedown="selectItem(item)")
+            ul.list-unstyled
+                li.border-left.border-bottom(
+                v-for="(item, key) in filteredItems",
+                :key="key",
+                @mousedown="selectItem(item)",
+                :class="{'hightlighted': highlightedIndex == key}")
                     slot(name="result-list", :item="item") {{defaultResultSlotMarkup(item)}}
-            .no-results(v-show="isEmpty")
+            .p-1(v-show="isEmpty")
                 slot(name="no-results") No results matched your query.
 
 </template>
 <style scoped>
-    .input-results-continer {
-        padding: 2px;
-        border: 1px solid #ababab;
-        border-radius: 2px;
-        display: flex;
-        flex-direction: row;
-        align-items: start;
-        align-items: stretch;
-    }
     .result-block {
-        background: #00adef;
-        color: white;
-        padding: 1px 10px;
-        margin: 3px;
-        border-radius: 3px;
-        display: flex;
-        position: relative;
         z-index: 0;
     }
     .result-block .delete{
@@ -209,12 +221,12 @@
         cursor: pointer;
     }
     .result-block .delete:hover{
-        margin-left: -6px;
+        margin-left: -5px;
         color: white;
     }
     .result-block .delete:hover::before{
         content: '';
-        background: #ff4a4a;
+        background: #e54c60;
         width: 15px;
         height: 15px;
         border-radius: 50%;
@@ -222,40 +234,17 @@
         position: relative;
         z-index: -1;
         top: 2px;
-        left: 12px;
+        left: 12.2px;
     }
 
-    .search-input {
-        padding: 3px 2px;
-        font-size: 1em;
+    input {
         outline: 0;
-        border: none;
         flex: 1;
     }
-    .Results {
-        margin: 0;
-        padding: 0;
-        text-align: left;
-        position: relative;
-    }
-    .Results li {
-        background: #cdefd9;
-        margin: 0;
-        padding: 0.8em 0 0.1em 1em;
-        list-style: none;
-        width: 100%;
-        border-bottom: 1px solid #d5efff;
-        border-left: 1px solid #00adef;
-        transition: ease-in-out 0.5s;
+    li {
         cursor: pointer;
-
-        background: -moz-linear-gradient(left, rgba(0,173,239,0.03) 0%, rgba(125,185,232,0) 100%);
-        background: -webkit-linear-gradient(left, rgba(0,173,239,0.03) 0%,rgba(125,185,232,0) 100%);
-        background: linear-gradient(to right, rgba(0,173,239,0.03) 0%,rgba(125,185,232,0) 100%);
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0800adef', endColorstr='#007db9e8',GradientType=1 );
     }
-
-    .no-results{
-        padding: 1em;
+    li.hightlighted {
+        border: 1px solid #00adef !important;
     }
 </style>
