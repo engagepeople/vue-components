@@ -202,8 +202,8 @@
                 v-model="query"
             )
         section(v-if="focused")
-            ul.list-unstyled
-                li.border-left.border-bottom(
+            ul.list-unstyled.position-absolute.results-list
+                li.border(
                 v-for="(item, key) in filteredItems",
                 :key="key",
                 @mousedown="selectItem(item)",
@@ -214,6 +214,12 @@
 
 </template>
 <style scoped>
+    .results-list {
+        z-index: 1;
+        background: white;
+        max-height: 400px;
+        overflow-y: scroll;
+    }
     .result-block {
         z-index: 0;
     }
