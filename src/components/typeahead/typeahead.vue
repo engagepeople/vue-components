@@ -50,6 +50,7 @@
             items: function() {
                 if (this.items) {
                     this.itemsWithIds = this.assignItemsUIDs(this.items)
+                    this.filterItems()
                 }
 
             }
