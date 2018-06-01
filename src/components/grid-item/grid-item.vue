@@ -7,6 +7,10 @@
         required: true,
         type: String,
       },
+      title: {
+        required: false,
+        type: String,
+      },
     },
   }
 </script>
@@ -17,6 +21,7 @@
             img.image(:style='`background-image:url(${image})`', src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==")
             slot(name="image")
         slot
+            p(v-text='title')
 
 </template>
 <style scoped>
