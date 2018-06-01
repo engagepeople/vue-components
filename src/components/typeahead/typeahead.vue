@@ -84,6 +84,7 @@
                 this.emitResult()
                 this.query = ''
                 this.highlightedIndex = -1
+                this.$nextTick(() => this.$refs.input.focus())
             },
             removeFromResults(key){
                 this.results.splice(key, 1)
@@ -115,7 +116,6 @@
                             break;
                         case 'Enter':
                             this.selectItem(this.filteredItems[this.highlightedIndex])
-                            this.$refs['input'].blur()
                             break;
                     }
                 }
@@ -217,7 +217,7 @@
             )
         section(v-if="focused")
             ul.list-unstyled.position-absolute.results-list
-                li.border(
+                li.border.border-top-white(
                 v-for="(item, key) in filteredItems",
                 :key="key",
                 @mousedown="selectItem(item)",
@@ -252,5 +252,8 @@
     }
     .results-list > li.hightlighted {
         border: 1px solid #00adef !important;
+    }
+    .border-top-white {
+        border-top: 1px white solid !important;
     }
 </style>
