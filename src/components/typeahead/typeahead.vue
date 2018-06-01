@@ -1,6 +1,4 @@
 <script>
-    const UID_key = '__pd_ta_uid'
-
     /* Implementation of lodash.get function */
     function getProp( object, keys, defaultVal ){
         keys = Array.isArray( keys )? keys : keys.split('.');
@@ -44,6 +42,10 @@
                 focused: false,
                 warnedAbout: [], // prevents multiple identical warnings
                 highlightedIndex: -1,
+                internalKeys: {
+                    UID_key:        '__pd_ta_uid',
+                    resultLabel:    '__pd_ta_result_label'
+                }
             }
         },
         watch: {
@@ -57,14 +59,23 @@
         },
         methods: {
             emitResult() {
+                let cleanResults = JSON.parse(JSON.stringify(this.results));
+                cleanResults.forEach(r => {
+                    Object.values(this.internalKeys).forEach( v => delete r[v])
+                    return r
+                })
+
                 if (this.multiSelect) {
-                    this.$emit('input', this.results)
+                    this.$emit('input', cleanResults)
                 } else {
-                    this.$emit('input', this.results[0])
+                    this.$emit('input', cleanResults[0])
                 }
 
             },
             selectItem(item) {
+                if (!this.$scopedSlots['result-text']) {
+                    item[this.internalKeys.resultLabel] = this.defaultResultSlotMarkup(item, true)
+                }
                 if (this.multiSelect) {
                     this.results.push(item)
                 } else {
@@ -121,7 +132,7 @@
                 return S4()+S4();
             },
             assignItemsUIDs(items) {
-                items.forEach(e => e[UID_key] = this.guidGenerator())
+                items.forEach(e => e[this.internalKeys.UID_key] = this.guidGenerator())
                 return items
             },
             filterItems() {
@@ -130,8 +141,8 @@
                 if (this.multiSelect) {
                     // filter out already selected items
                     if (this.results.length) {
-                        selectedUIDs = this.results.map(e => e[UID_key])
-                        toFilter = this.itemsWithIds.filter(item => selectedUIDs.indexOf(item[UID_key]) === -1)
+                        selectedUIDs = this.results.map(e => e[this.internalKeys.UID_key])
+                        toFilter = this.itemsWithIds.filter(item => selectedUIDs.indexOf(item[this.internalKeys.UID_key]) === -1)
                     }
                 }
                 this.filteredItems = toFilter.filter(item => {
@@ -161,15 +172,18 @@
                 }
             },
 
-            defaultResultSlotMarkup(item) {
-                let rez = ''
-                this.filterKeys.forEach(key => {
+            defaultResultSlotMarkup(item, firstOnly = false) {
+                let matches = []
+                this.filterKeys.some(key => {
                     const stringKey = String(item[key]).toLowerCase();
                     if (stringKey.indexOf(this.query.toLowerCase()) > -1) {
-                        rez += `${key}: ${item[key]}. `
+                        matches.push(`${key}: ${item[key]}`)
+                        if (firstOnly) {
+                            return true
+                        }
                     }
                 })
-                return rez;
+                return matches.join('. ');
             }
         },
 
@@ -189,9 +203,9 @@
     .pd-typeahed
         .border.border-light.p-1.d-flex.flex-wrap
             .result-block.bg-primary.text-white.py-1.px-3.m-1.d-flex.align-items-center(v-for="(item, key) in results", :key="key")
-                .label {{ $scopedSlots['result-text']({item})[0].text }}
+                .label(v-text="$scopedSlots['result-text'] ? $scopedSlots['result-text']({item})[0].text : item[internalKeys.resultLabel]")
                 .delete(@click="removeFromResults(key)") ×
-            input.border-0.ml-1(
+            input#tpInput.border-0.ml-1(
                 ref="input",
                 type="text",
                 @input="onInput",
@@ -208,7 +222,8 @@
                 :key="key",
                 @mousedown="selectItem(item)",
                 :class="{'hightlighted': highlightedIndex == key}")
-                    slot(name="result-list", :item="item") {{defaultResultSlotMarkup(item)}}
+                    slot(name="result-list", :item="item")
+                        .p-1(v-text="defaultResultSlotMarkup(item)")
             .p-1(v-show="isEmpty")
                 slot(name="no-results") No results matched your query.
 
@@ -228,31 +243,14 @@
         margin-left: 10px;
         cursor: pointer;
     }
-    .result-block .delete:hover{
-        margin-left: -5px;
-        color: white;
-    }
-    .result-block .delete:hover::before{
-        content: '';
-        background: #e54c60;
-        width: 15px;
-        height: 15px;
-        border-radius: 50%;
-        display: inline-block;
-        position: relative;
-        z-index: -1;
-        top: 2px;
-        left: 12.2px;
-    }
-
-    input {
+    #tpInput {
         outline: 0;
         flex: 1;
     }
-    li {
+    .results-list > li {
         cursor: pointer;
     }
-    li.hightlighted {
+    .results-list > li.hightlighted {
         border: 1px solid #00adef !important;
     }
 </style>
