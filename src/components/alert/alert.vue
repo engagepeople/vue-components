@@ -17,7 +17,7 @@
     .pd-alert
         .mb-4
             .alert.alert-primary.mb-0(role="alert", :class="`alert-${this.variant}`")
-                h3.alert-heading.mb-2.d-flex.align-items-center.justify-content-center.flex-wrap
+                h3.alert-heading.mb-0.d-flex.align-items-center.justify-content-center.flex-wrap
                     .mx-3
                         svg(
                         v-if="variant === 'success'",
