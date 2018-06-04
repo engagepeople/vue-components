@@ -81,6 +81,9 @@
                 } else {
                     this.results[0] = item
                 }
+                if (this.startAt === 0) {
+                    this.filterItems()
+                }
                 this.emitResult()
                 this.query = ''
                 this.highlightedIndex = -1
@@ -96,6 +99,7 @@
             },
             onBlur() {
                 this.focused = false
+                this.highlightedIndex = -1
             },
             onInput() {
                 this.setFilteredItems()
@@ -108,15 +112,27 @@
                             if (this.highlightedIndex > 0) {
                                 this.highlightedIndex --
                             }
+                            this.scrollResultList()
                             break;
                         case 'ArrowDown':
                             if (this.highlightedIndex < this.filteredItems.length-1) {
                                 this.highlightedIndex ++
                             }
+                            this.scrollResultList()
                             break;
                         case 'Enter':
                             this.selectItem(this.filteredItems[this.highlightedIndex])
                             break;
+                    }
+                }
+            },
+            scrollResultList() {
+                const li = this.$refs.resultList.querySelector(`li:nth-child(${this.highlightedIndex + 1})`)
+                if (li) {
+                    if (li.offsetTop + li.clientHeight > this.$refs.resultList.scrollTop + this.$refs.resultList.clientHeight) {
+                        this.$refs.resultList.scrollTop = li.offsetTop + li.clientHeight - this.$refs.resultList.clientHeight + 2
+                    } else if (li.offsetTop < this.$refs.resultList.scrollTop) {
+                        this.$refs.resultList.scrollTop = li.offsetTop - 2
                     }
                 }
             },
@@ -204,7 +220,8 @@
         .border.border-light.p-1.d-flex.flex-wrap
             .result-block.bg-primary.text-white.py-1.px-3.m-1.d-flex.align-items-center(v-for="(item, key) in results", :key="key")
                 .label(v-text="$scopedSlots['result-text'] ? $scopedSlots['result-text']({item})[0].text : item[internalKeys.resultLabel]")
-                .delete(@click="removeFromResults(key)") ×
+                button.close.ml-3(type='button', aria-label='Remove', @click="removeFromResults(key)")
+                    span.text-white(aria-hidden='true') &times;
             input#tpInput.border-0.ml-1(
                 ref="input",
                 type="text",
@@ -215,13 +232,13 @@
                 :placeholder="placeholder",
                 v-model="query"
             )
-        section(v-if="focused")
-            ul.list-unstyled.position-absolute.results-list
-                li.border.border-top-white(
+        section.position-relative(v-if="focused")
+            ul.list-unstyled.position-absolute.results-list(ref="resultList")
+                li.border(
                 v-for="(item, key) in filteredItems",
                 :key="key",
                 @mousedown="selectItem(item)",
-                :class="{'hightlighted': highlightedIndex == key}")
+                :class="{'border-primary': highlightedIndex == key, 'border-top-white': highlightedIndex !== key}")
                     slot(name="result-list", :item="item")
                         .p-1(v-text="defaultResultSlotMarkup(item)")
             .p-1(v-show="isEmpty")
@@ -234,14 +251,11 @@
         background: white;
         max-height: 400px;
         overflow-y: scroll;
+        padding: 1px;
+        width: 100%;
     }
     .result-block {
         z-index: 0;
-    }
-    .result-block .delete{
-        font-size: 16px;
-        margin-left: 10px;
-        cursor: pointer;
     }
     #tpInput {
         outline: 0;
@@ -250,10 +264,11 @@
     .results-list > li {
         cursor: pointer;
     }
-    .results-list > li.hightlighted {
-        border: 1px solid #00adef !important;
-    }
     .border-top-white {
         border-top: 1px white solid !important;
+    }
+    .close {
+        text-shadow: none;
+        opacity: 1;
     }
 </style>
