@@ -21,7 +21,7 @@
         .media-body
             slot
                 h5(v-text="title")
-                p(v-text="description")
+                p.description(v-text="description")
                 div
                     small
                         pd-time-ago.text-dark(:date="date")
@@ -38,16 +38,12 @@
         background-repeat: no-repeat;
         background-position: center center;
     }
-    p {
+    p.description {
         min-height: 37px
     }
     .unread {
         margin-top: 40px;
         width: 12px;
         height: 12px;
-    }
-    img {
-        width: 100px;
-        height: 100px;
     }
 </style>
