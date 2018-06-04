@@ -7,6 +7,7 @@ import pdFeedItem from './components/feed-item/feed-item.vue'
 import pdGridItem from './components/grid-item/grid-item.vue'
 import pdMediaBlock from './components/media-block/media-block.vue'
 import pdProductItem from './components/product-item/product-item.vue'
+import typeahead from './components/typeahead/typeahead.vue'
 import pdTimeAgo from './components/time-ago/time-ago.vue'
 import dateFormat from './filters/DateFormatFilter'
 import numberFormat from './filters/NumberFormat'
@@ -26,6 +27,7 @@ const PodiumComponents = {
         Vue.component('pd-grid-item', pdGridItem)
         Vue.component('pd-media-block', pdMediaBlock)
         Vue.component('pd-product-item', pdProductItem)
+        Vue.component('pd-typeahead', typeahead)
         Vue.component('pd-time-ago', pdTimeAgo)
         Vue.filter('date', dateFormat)
         Vue.filter('number', numberFormat)
