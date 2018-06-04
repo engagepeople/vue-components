@@ -216,7 +216,7 @@
     }
 </script>
 <template lang="pug">
-    .pd-typeahed
+    .pd-typeahead
         .border.border-light.p-1.d-flex.flex-wrap
             .result-block.bg-primary.text-white.py-1.px-3.m-1.d-flex.align-items-center(v-for="(item, key) in results", :key="key")
                 .label(v-text="$scopedSlots['result-text'] ? $scopedSlots['result-text']({item})[0].text : item[internalKeys.resultLabel]")
