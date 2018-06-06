@@ -32,6 +32,9 @@
                 type: String,
                 default: 'Start typing to search...'
             },
+            id: {
+                type: String
+            },
         },
         data() {
             return {
@@ -222,7 +225,8 @@
                 .label(v-text="$scopedSlots['result-text'] ? $scopedSlots['result-text']({item})[0].text : item[internalKeys.resultLabel]")
                 button.close.ml-3(type='button', aria-label='Remove', @click="removeFromResults(key)")
                     span.text-white(aria-hidden='true') &times;
-            input#tpInput.border-0.ml-1(
+            input.border-0.ml-1(
+                :id="id",
                 ref="input",
                 type="text",
                 @input="onInput",
@@ -257,7 +261,7 @@
     .result-block {
         z-index: 0;
     }
-    #tpInput {
+    input {
         outline: 0;
         flex: 1;
     }
