@@ -226,6 +226,7 @@
                 button.close.ml-3(type='button', aria-label='Remove', @click="removeFromResults(key)")
                     span.text-white(aria-hidden='true') &times;
             input.border-0.ml-1(
+                autocomplete="off",
                 :id="id",
                 ref="input",
                 type="text",
