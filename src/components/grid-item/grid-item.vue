@@ -18,7 +18,7 @@
     div.mb-5.pd-grid-item
         .border.border-light.mb-3.position-relative
             .pd-grid-badge.bg-primary.text-white.text-truncate(v-text='badge', v-if="badge", :title="badge")
-            img.image(:style='`background-image:url(${image})`', src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==")
+            img.image(:style='`background-image:url(${image})`', :alt='title', src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==")
             slot(name="image")
         slot
             p(v-text='title')
