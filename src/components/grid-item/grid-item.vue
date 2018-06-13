@@ -35,7 +35,7 @@
         display: inline;
         position: absolute;
         top: 0;
-        right: 0;
+        left: 0;
         padding: 2px 5px;
         max-width: 100%;
     }

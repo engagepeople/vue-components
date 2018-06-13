@@ -15,22 +15,21 @@
 
 </script>
 <template lang="pug">
-    div.pd-feed-item.media.border-bottom.border-light
-        span.unread.bg-primary.rounded-circle(:class='{invisible: !unread}')
-        .image.mr-3.ml-3(:style='`background-image:url(${image})`')
-        .media-body
-            slot
-                h5(v-text="title")
-                p.description(v-text="description")
-                div
-                    small
-                        pd-time-ago.text-dark(:date="date")
+    .pd-feed-item.d-flex.flex-row.pb-3
+        .d-flex.justify-content-start.mr-3
+            span.unread.bg-primary.rounded-circle(:class='{invisible: !unread}', title='Unread', aria-label='Unread')
+        .d-flex.flex-row.w-100.pb-3.border-bottom
+            .justify-content-start
+                .image.mr-3(:style='`background-image:url(${image})`')
+            div
+                slot
+                    h5(v-text="title")
+                    p.description(v-text="description")
+                    div
+                        small
+                            pd-time-ago.text-dark(:date="date")
 </template>
 <style scoped>
-    .pd-feed-item {
-        padding-bottom: 18px;
-        margin-bottom: 20px;
-    }
     .image {
         width: 100px;
         height: 100px;
@@ -42,7 +41,7 @@
         min-height: 37px
     }
     .unread {
-        margin-top: 40px;
+        margin-top: 45px;
         width: 12px;
         height: 12px;
     }
