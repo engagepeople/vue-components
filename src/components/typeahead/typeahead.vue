@@ -64,7 +64,7 @@
             emitResult() {
                 let cleanResults = JSON.parse(JSON.stringify(this.results));
                 cleanResults.forEach(r => {
-                    Object.values(this.internalKeys).forEach( v => delete r[v])
+                    Object.values(this.internalKeys).forEach(v => delete r[v])
                     return r
                 })
 
@@ -91,7 +91,7 @@
                 }
                 this.emitResult()
                 this.highlightedIndex = -1
-                this.$nextTick(() => this.$refs.input.focus() )
+                this.$nextTick(() => this.$refs.input.focus())
 
             },
             removeFromResults(key){
