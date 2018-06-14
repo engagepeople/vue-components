@@ -76,6 +76,8 @@
 
             },
             selectItem(item) {
+                this.query = ''
+                this.filteredItems = []
                 if (!this.$scopedSlots['result-text']) {
                     item[this.internalKeys.resultLabel] = this.defaultResultSlotMarkup(item, true)
                 }
@@ -88,9 +90,9 @@
                     this.filterItems()
                 }
                 this.emitResult()
-                this.query = ''
                 this.highlightedIndex = -1
-                this.$nextTick(() => this.$refs.input.focus())
+                this.$nextTick(() => this.$refs.input.focus() )
+
             },
             removeFromResults(key){
                 this.results.splice(key, 1)
@@ -146,12 +148,11 @@
                     this.filteredItems = undefined
                 }
             },
-            guidGenerator() {
-                let S4 = () => (((1+Math.random())*0x10000)|0).toString(16).substring(1)
-                return S4()+S4();
+            guidGenerator(item) {
+                return this.filterKeys.reduce((a, e) => `${a}${item[e]}`, '')
             },
             assignItemsUIDs(items) {
-                items.forEach(e => e[this.internalKeys.UID_key] = this.guidGenerator())
+                items.forEach(e => e[this.internalKeys.UID_key] = this.guidGenerator(e))
                 return items
             },
             filterItems() {
@@ -265,6 +266,7 @@
     input {
         outline: 0;
         flex: 1;
+        margin: 7px 0;
     }
     .results-list > li {
         cursor: pointer;
