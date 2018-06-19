@@ -76,6 +76,8 @@
 
             },
             selectItem(item) {
+                this.query = ''
+                this.filteredItems = undefined
                 if (!this.$scopedSlots['result-text']) {
                     item[this.internalKeys.resultLabel] = this.defaultResultSlotMarkup(item, true)
                 }
@@ -108,9 +110,9 @@
                 this.setFilteredItems()
                 this.$emit('onInput', this.query)
             },
-            onKeydown({key}) {
+            onKeydown(event) {
                 if (getProp(this, 'filteredItems.length') && this.focused) {
-                    switch (key) {
+                    switch (event.key) {
                         case 'ArrowUp':
                             if (this.highlightedIndex > 0) {
                                 this.highlightedIndex --
@@ -124,6 +126,7 @@
                             this.scrollResultList()
                             break;
                         case 'Enter':
+                            event.preventDefault()
                             this.selectItem(this.filteredItems[this.highlightedIndex])
                             break;
                     }

@@ -9,9 +9,11 @@ import pdMediaBlock from './components/media-block/media-block.vue'
 import pdProductItem from './components/product-item/product-item.vue'
 import typeahead from './components/typeahead/typeahead.vue'
 import pdTimeAgo from './components/time-ago/time-ago.vue'
+import pdCharacterCount from './components/character-count/character-count.vue'
 import dateFormat from './filters/DateFormatFilter'
 import numberFormat from './filters/NumberFormat'
-import TimeAgo from './filters/TimeAgo'
+import timeAgo from './filters/TimeAgo'
+import capitalize from './filters/Capitalize'
 import Utils from './utils'
 import {ICurrency} from '../types'
 
@@ -29,9 +31,11 @@ const PodiumComponents = {
         Vue.component('pd-product-item', pdProductItem)
         Vue.component('pd-typeahead', typeahead)
         Vue.component('pd-time-ago', pdTimeAgo)
+        Vue.component('pd-character-count', pdCharacterCount)
         Vue.filter('date', dateFormat)
         Vue.filter('number', numberFormat)
-        Vue.filter('timeago', TimeAgo)
+        Vue.filter('timeago', timeAgo)
+        Vue.filter('capitalize', capitalize)
 
         Vue.mixin({
             beforeCreate(): void {
@@ -44,6 +48,9 @@ const PodiumComponents = {
                     },
                     setDateFormat: (date: string, time: string): void => {
                         utils.setDateFormat(date, time)
+                    },
+                    setPageTitle: (title: string): void => {
+                        document.title = title
                     },
                 }
             },
