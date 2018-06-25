@@ -61,10 +61,16 @@
             }
         },
         methods: {
+            reset() {
+                this.filteredItems = undefined
+                this.query = ''
+                this.results = []
+                this.focused = false
+            },
             emitResult() {
                 let cleanResults = JSON.parse(JSON.stringify(this.results));
                 cleanResults.forEach(r => {
-                    Object.values(this.internalKeys).forEach( v => delete r[v])
+                    Object.values(this.internalKeys).forEach(v => delete r[v])
                     return r
                 })
 
@@ -149,12 +155,11 @@
                     this.filteredItems = undefined
                 }
             },
-            guidGenerator() {
-                let S4 = () => (((1+Math.random())*0x10000)|0).toString(16).substring(1)
-                return S4()+S4();
+            guidGenerator(item) {
+                return this.filterKeys.reduce((a, e) => `${a}${item[e]}`, '')
             },
             assignItemsUIDs(items) {
-                items.forEach(e => e[this.internalKeys.UID_key] = this.guidGenerator())
+                items.forEach(e => e[this.internalKeys.UID_key] = this.guidGenerator(e))
                 return items
             },
             filterItems() {
@@ -223,11 +228,11 @@
 </script>
 <template lang="pug">
     .pd-typeahead
-        .border.border-light.p-1.d-flex.flex-wrap
-            .result-block.bg-light.border.border-dark.py-1.px-3.m-1.d-flex.align-items-center(v-for="(item, key) in results", :key="key")
+        .border.border-light.p-0.d-flex.flex-wrap
+            .result-block.border.border-primary.py-0.px-3.m-1.d-flex.align-items-center(v-for="(item, key) in results", :key="key")
                 .label(v-text="$scopedSlots['result-text'] ? $scopedSlots['result-text']({item})[0].text : item[internalKeys.resultLabel]")
                 button.close.ml-3(type='button', aria-label='Remove', @click="removeFromResults(key)")
-                    span(aria-hidden='true') &times;
+                    span.text-primary(aria-hidden='true') &times;
             input.border-0.ml-1(
                 autocomplete="off",
                 :id="id",
@@ -268,6 +273,7 @@
     input {
         outline: 0;
         flex: 1;
+        padding: 0.375rem;
     }
     .results-list > li {
         cursor: pointer;

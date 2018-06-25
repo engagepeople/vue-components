@@ -19,20 +19,16 @@
         return payload
       }
     },
-    data () {
-      return {
-        currency:  utils.getCurrency()
-      }
-    },
     props: {
       amount: {
-        required: false,
         type: Number,
       },
       showLabel: {
-        required: false,
         default: true,
         type: Boolean,
+      },
+      currency: {
+        default: () => utils.getCurrency()
       }
     },
   }

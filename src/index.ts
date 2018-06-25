@@ -13,7 +13,6 @@ import pdCharacterCount from './components/character-count/character-count.vue'
 import dateFormat from './filters/DateFormatFilter'
 import numberFormat from './filters/NumberFormat'
 import timeAgo from './filters/TimeAgo'
-import capitalize from './filters/Capitalize'
 import Utils from './utils'
 import {ICurrency} from '../types'
 
@@ -35,7 +34,6 @@ const PodiumComponents = {
         Vue.filter('date', dateFormat)
         Vue.filter('number', numberFormat)
         Vue.filter('timeago', timeAgo)
-        Vue.filter('capitalize', capitalize)
 
         Vue.mixin({
             beforeCreate(): void {

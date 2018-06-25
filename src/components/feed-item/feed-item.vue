@@ -13,7 +13,7 @@
     },
     computed: {
         initials() {
-            return this.title.split(' ').map(w => w.charAt(0).toUpperCase()).join('')
+            return this.title.split(' ').slice(0, 2).map(w => w.charAt(0).toUpperCase()).join('')
         }
     }
   }
@@ -26,12 +26,14 @@
         .d-flex.flex-row.w-100.pb-3.border-bottom
             .justify-content-start
                 .image.mr-3(v-if="image", :style='`background-image:url(${image})`')
-                .circle.mr-3.rounded-circle.d-flex.align-items-center.justify-content-center(v-if="!image")
+                .circle.mr-3.rounded-circle.d-flex.align-items-center.justify-content-center.bg-light(v-if="!image")
                     .text-white(v-text="initials")
             div
                 slot
                     h5(v-text="title")
-                    p.description(v-text="description")
+                    p.description
+                        span(v-if="description", v-text="description")
+                        slot(name="description")
                     div
                         small
                             pd-time-ago.text-dark(:date="date")
@@ -47,7 +49,6 @@
     .circle {
         width: 100px;
         height: 100px;
-        background: #c4c4c6;
         font-size: 24px;
     }
     p.description {

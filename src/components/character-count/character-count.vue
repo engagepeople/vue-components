@@ -31,5 +31,4 @@
             }
         }
     }
-    // todo: discuss if this should be a directive
 </script>
