@@ -1,4 +1,3 @@
-// tslint:disable:no-any
 import pdAlert from './components/alert/alert.vue'
 import pdBadgeCount from './components/badge-count/badge-count.vue'
 import pdCurrency from './components/currency/currency.vue'

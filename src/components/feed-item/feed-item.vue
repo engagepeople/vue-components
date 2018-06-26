@@ -3,7 +3,7 @@
     name: 'pd-feed-item',
     props: {
       description: {type: String},
-      date: {type: Date},
+      date: {type: Date, required: false},
       unread: {type: Boolean, default: false},
       title: {type: String},
       image: {
@@ -13,7 +13,7 @@
     },
     computed: {
         initials() {
-            return this.title.split(' ').slice(0, 2).map(w => w.charAt(0).toUpperCase()).join('')
+            return this.title && this.title.split(' ').slice(0, 2).map(w => w.charAt(0).toUpperCase()).join('')
         }
     }
   }
@@ -36,7 +36,7 @@
                         slot(name="description")
                     div
                         small
-                            pd-time-ago.text-dark(:date="date")
+                            pd-time-ago.text-dark(v-if="date", :date="date")
 </template>
 <style scoped>
     .image {
