@@ -44,7 +44,7 @@
                 results: [],
                 focused: false,
                 warnedAbout: [], // prevents multiple identical warnings
-                highlightedIndex: -1,
+                highlightedIndex: 0,
                 internalKeys: {
                     UID_key:        '__pd_ta_uid',
                     resultLabel:    '__pd_ta_result_label'
@@ -97,7 +97,7 @@
                 }
                 this.emitResult()
                 this.query = ''
-                this.highlightedIndex = -1
+                this.highlightedIndex = 0
                 this.$nextTick(() => this.$refs.input.focus())
             },
             removeFromResults(key){
@@ -110,13 +110,15 @@
             },
             onBlur() {
                 this.focused = false
-                this.highlightedIndex = -1
+                this.highlightedIndex = 0
+                this.query = ''
             },
             onInput() {
                 this.setFilteredItems()
                 this.$emit('onInput', this.query)
             },
             onKeydown(event) {
+                // handle keyboard navigation within result list
                 if (getProp(this, 'filteredItems.length') && this.focused) {
                     switch (event.key) {
                         case 'ArrowUp':
@@ -136,6 +138,11 @@
                             this.selectItem(this.filteredItems[this.highlightedIndex])
                             break;
                     }
+                }
+                // remove last picked result on backspace hit
+                if (event.key === 'Backspace' && !this.query.length && this.results.length) {
+                    this.results.pop()
+                    this.emitResult()
                 }
             },
             scrollResultList() {
@@ -173,28 +180,39 @@
                     }
                 }
                 this.filteredItems = toFilter.filter(item => {
-                    let match = false
-                    this.filterKeys.forEach(key => {
-                        if (!getProp(item, key)) {
-                            if (this.warnedAbout.indexOf(key) === -1) {
-                                console.warn(`Property [${key}] doesn't exist on some of the objects in the set.`)
-                                this.warnedAbout.push(key)
+                    let matchedWords = 0
+                    const queryWords = this.query
+                        .trim()
+                        .replace(/\s+/g, ' ')
+                        .toLowerCase()
+                        .split(' ')
+                    let filterKeys = JSON.parse(JSON.stringify(this.filterKeys))
+
+                    queryWords.forEach(word => {
+                        filterKeys.forEach((filterKey, filterKeyIndex) => {
+                            if (!getProp(item, filterKey)) {
+                                if (this.warnedAbout.indexOf(filterKey) === -1) {
+                                    console.warn(`Property [${filterKey}] doesn't exist on some of the objects in the set.`)
+                                    this.warnedAbout.push(filterKey)
+                                }
+                                return
                             }
-                            return
-                        }
-                        if (String(getProp(item, key))
-                                .toLowerCase()
-                                .indexOf(this.query.toLowerCase()) > -1) {
-                            match = true
-                        }
+                            if (String(getProp(item, filterKey))
+                                    .toLowerCase()
+                                    .indexOf(word) > -1) {
+                                matchedWords++
+                                filterKeys.splice(filterKeyIndex, 1)
+                            }
+                        })
                     })
-                    return match
+
+                    return matchedWords === queryWords.length
                 })
 
                 if (!this.filteredItems.length) {
-                    this.highlightedIndex = -1
+                    this.highlightedIndex = 0
                 }
-                if (this.highlightedIndex > this.filteredItems.length - 1) {
+                if (this.filteredItems.length && this.highlightedIndex > this.filteredItems.length - 1) {
                     this.highlightedIndex = this.filteredItems.length - 1
                 }
             },
