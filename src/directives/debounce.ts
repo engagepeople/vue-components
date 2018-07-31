@@ -16,17 +16,17 @@ export interface IDebounceBinding {
 
 const debounce = (fn: IDebounceCallBack, delay: number) => {
     let timeoutID: number
-    return function(): void { // return function(this: HTMLInputElement): void {
+    // tslint:disable:no-any
+    return function(this: HTMLElement): void {
         clearTimeout(timeoutID)
         const args = arguments
-        const that = this
         timeoutID = window.setTimeout(() => {
-            fn.apply(that, args)
+            fn.apply(this, args)
         }, delay)
     }
 }
 
-export default (el: HTMLInputElement, binding: IDebounceBinding) => {
+export default (el: HTMLElement, binding: IDebounceBinding) => {
     if (binding.value !== binding.oldValue) {
         el.oninput = debounce((evt: Event) => {
             el.dispatchEvent(new Event('change'))

@@ -17,7 +17,7 @@
   "license": "Apache-2.0",
   "main": "dist/index.js",
   "scripts": {
-    "build": "webpack",
+    "build": "webpack -p",
     "dev": "webpack --watch",
     "lint": "tslint -c tslint.json src/*/**.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
