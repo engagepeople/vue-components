@@ -1,3 +1,4 @@
+// tslint:disable:no-any
 import pdAlert from './components/alert/alert.vue'
 import pdBadgeCount from './components/badge-count/badge-count.vue'
 import pdCurrency from './components/currency/currency.vue'
@@ -13,6 +14,7 @@ import dateFormat from './filters/DateFormatFilter'
 import numberFormat from './filters/NumberFormat'
 import timeAgo from './filters/TimeAgo'
 import trimString from './filters/TrimString'
+import debounce from './directives/debounce'
 import Utils from './utils'
 import {ICurrency} from '../types'
 
@@ -35,6 +37,7 @@ const PodiumComponents = {
         Vue.filter('number', numberFormat)
         Vue.filter('timeago', timeAgo)
         Vue.filter('trim', trimString)
+        Vue.directive('debounce', debounce)
 
         Vue.mixin({
             beforeCreate(): void {
