@@ -2,30 +2,34 @@
  Usage:
  input(v-debounce='500', v-model.lazy='sample')
 
- Note: This will note work in a b-input
+ Note: This will not work in a b-input
  a) input.form-control(v-debounce, v-model.lazy='value') OR
  b) b-input(v-debounce, :value='value', @change.native='value = $event.target.value')
 
 */
+type IDebounceCallBack = (action: Event) => void
 
-directive.debounce = (fn, delay) => {
-  let timeoutID = null
-  return function () {
-    clearTimeout(timeoutID)
-    let args = arguments
-    let that = this
-    timeoutID = setTimeout(function () {
-      fn.apply(that, args)
-    }, delay)
-  }
+export interface IDebounceBinding {
+    value: string
+    oldValue: string
 }
 
-function directive (el, binding) {
-  if (binding.value !== binding.oldValue) { // change debounce only if interval has changed
-    el.oninput = directive.debounce(function (evt) {
-      el.dispatchEvent(new Event('change'))
-    }, parseInt(binding.value) || 400)
-  }
+const debounce = (fn: IDebounceCallBack, delay: number) => {
+    let timeoutID: number
+    return function(): void { // return function(this: HTMLInputElement): void {
+        clearTimeout(timeoutID)
+        const args = arguments
+        const that = this
+        timeoutID = window.setTimeout(() => {
+            fn.apply(that, args)
+        }, delay)
+    }
 }
 
-module.exports = directive
+export default (el: HTMLInputElement, binding: IDebounceBinding) => {
+    if (binding.value !== binding.oldValue) {
+        el.oninput = debounce((evt: Event) => {
+            el.dispatchEvent(new Event('change'))
+        }, parseInt(binding.value, 10) || 400)
+    }
+}
