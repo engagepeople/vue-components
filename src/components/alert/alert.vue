@@ -3,7 +3,7 @@
     name: 'pd-alert',
     props: {
       title: {
-        required: true,
+        default: '',
         type: String,
       },
       variant: {
@@ -35,13 +35,14 @@
                             circle.alert(cx='20.5', cy='20.5', r='20')
                             line.alert(x1='20.5', y1='28.5', x2='20.5', y2='30.5')
                             line.alert(x1='20.5', y1='10.5', x2='20.5', y2='25.5')
-
-                    span.text-center(v-text='title')
+                    span.text-center
+                        slot(name='title')
+                            span(v-text='title')
             .link.text-center.px-4.py-3.bg-white.border-top-0(:class="`alert-${this.variant}`", v-if="$slots.default")
                 slot
 </template>
 <style scoped>
-    .link.alert-success, .link.alert-warning{
+    .link.alert-success, .link.alert-warning {
         border-width: 1px;
         border-style: solid;
     }
