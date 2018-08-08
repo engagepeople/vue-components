@@ -7,7 +7,7 @@
     name: 'pd-currency',
     computed: {
       build () {
-        const amount = NumberFormat(this.amount, this.currency.precision)
+        const amount = NumberFormat(this.amount && Number(this.amount), this.currency.precision)
         let payload = ''
         if (amount) {
           payload += amount
@@ -21,7 +21,7 @@
     },
     props: {
       amount: {
-        type: Number,
+        type: [Number, String],
       },
       showLabel: {
         default: true,
