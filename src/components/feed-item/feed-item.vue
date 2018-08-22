@@ -28,14 +28,15 @@
                 .image.mr-3.mt-3(v-if="image", :style='`background-image:url(${image})`')
                 .circle.mr-3.rounded-circle.d-flex.align-items-center.justify-content-center.bg-light(v-if="!image")
                     .text-white(v-text="initials")
-            slot
-                h5(v-text="title")
-                p.description
-                    span(v-if="description", v-text="description")
-                    slot(name="description")
-                div
-                    small
-                        pd-time-ago.text-dark(v-if="date", :date="date")
+            .w-100
+                slot
+                    h5(v-text="title")
+                    p.description
+                        span(v-if="description", v-text="description")
+                        slot(name="description")
+                    div
+                        small
+                            pd-time-ago.text-dark(v-if="date", :date="date")
 </template>
 <style scoped>
     .image {
