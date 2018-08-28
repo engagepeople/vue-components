@@ -10,6 +10,7 @@ import pdProductItem from './components/product-item/product-item.vue'
 import typeahead from './components/typeahead/typeahead.vue'
 import pdTimeAgo from './components/time-ago/time-ago.vue'
 import pdCharacterCount from './components/character-count/character-count.vue'
+import pdScrollTop from './components/scroll-top/scroll-top.vue'
 import dateFormat from './filters/DateFormatFilter'
 import numberFormat from './filters/NumberFormat'
 import timeAgo from './filters/TimeAgo'
@@ -33,6 +34,7 @@ const PodiumComponents = {
         Vue.component('pd-typeahead', typeahead)
         Vue.component('pd-time-ago', pdTimeAgo)
         Vue.component('pd-character-count', pdCharacterCount)
+        Vue.component('pd-scroll-top', pdScrollTop)
         Vue.filter('date', dateFormat)
         Vue.filter('number', numberFormat)
         Vue.filter('timeago', timeAgo)
