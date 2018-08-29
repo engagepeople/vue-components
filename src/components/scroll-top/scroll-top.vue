@@ -4,7 +4,9 @@
     v-show="visible",
     @click="backToTop")
         slot
-            .button Back to top
+            b-btn.back-to-top.text-center.text-primary.transparent-white-bg.p-1.border-0(variant='primary')
+                .hat ^
+                | Back to top
 </template>
 
 <script>
@@ -51,5 +53,16 @@
         position: fixed;
         z-index: 1000;
         cursor:pointer;
+    }
+    .transparent-white-bg {
+        background: rgba(255,255,255,0.7);
+    }
+    .hat {
+        font-size: 17px;
+    }
+    .back-to-top {
+        font-size: 12px;
+        line-height: 13px;
+        border-radius: 3px;
     }
 </style>
