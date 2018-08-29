@@ -6,6 +6,9 @@
   export default {
     name: 'pd-date',
     computed: {
+      datetime () {
+        return DateFilter(this.date, 'isoDateTime')
+      },
       build () {
         const date = DateFilter(this.date, this.dateSettings.date)
         const time = DateFilter(this.date, this.dateSettings.time)
@@ -44,5 +47,5 @@
   }
 </script>
 <template lang="pug">
-    span.pd-date(v-text='build')
+    time.pd-date(:datetime='datetime', v-text='build')
 </template>
