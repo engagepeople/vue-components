@@ -43,6 +43,9 @@ const PodiumComponents = {
         Vue.mixin({
             beforeCreate(): void {
                 this.$podium = {
+                    formatCurrency: (amount: number, showLabel: boolean = true, currency: ICurrency): string => {
+                        return utils.formatCurrency(amount, showLabel, currency)
+                    },
                     formatNumber: (value: number, decimal: number = 0): string => {
                         return NumberFormat(value, decimal)
                     },

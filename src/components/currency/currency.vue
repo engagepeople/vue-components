@@ -1,22 +1,12 @@
 <script>
   import Utils from './../../utils'
-  import NumberFormat from './../../filters/NumberFormat'
-
   const utils = Utils.Instance
+
   export default {
     name: 'pd-currency',
     computed: {
       build () {
-        const amount = NumberFormat(this.amount, this.currency.precision)
-        let payload = ''
-        if (amount) {
-          payload += amount
-        }
-        if (this.showLabel) {
-          if (payload !== '') payload += ' '
-          payload += this.currency.name
-        }
-        return payload
+        return utils.formatCurrency(this.amount, this.showLabel, this.currency)
       }
     },
     props: {
