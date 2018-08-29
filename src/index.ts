@@ -18,6 +18,7 @@ import trimString from './filters/TrimString'
 import debounce from './directives/debounce'
 import Utils from './utils'
 import {ICurrency} from '../types'
+import NumberFormat from './filters/NumberFormat'
 
 const utils = Utils.Instance
 const PodiumComponents = {
@@ -44,6 +45,12 @@ const PodiumComponents = {
         Vue.mixin({
             beforeCreate(): void {
                 this.$podium = {
+                    formatCurrency: (amount: number, showLabel: boolean = true, currency: ICurrency): string => {
+                        return utils.formatCurrency(amount, showLabel, currency)
+                    },
+                    formatNumber: (value: number, decimal: number = 0): string => {
+                        return NumberFormat(value, decimal)
+                    },
                     getCurrency: (): ICurrency => {
                         return utils.getCurrency()
                     },

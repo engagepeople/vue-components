@@ -1,4 +1,5 @@
 import {ICurrency, IDateFormat} from '../types'
+import NumberFormat from './filters/NumberFormat'
 
 export default class Utils {
     private static UtilsInstance: Utils
@@ -34,6 +35,21 @@ export default class Utils {
         this.currency.name = name
         this.currency.precision = precision
         return this.currency
+    }
+
+    public formatCurrency(
+        amount: number | null,
+        showLabel: boolean = true,
+        currency: ICurrency = this.getCurrency()): string {
+
+        const result = []
+        if (amount) {
+            result.push(NumberFormat(amount, currency.precision))
+        }
+        if (showLabel) {
+            result.push(currency.name)
+        }
+        return result.join(' ')
     }
 
     public static get Instance(): Utils {
