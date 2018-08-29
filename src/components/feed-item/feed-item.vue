@@ -25,7 +25,7 @@
             span.unread.bg-primary.rounded-circle(:class='{invisible: !unread}', title='Unread', aria-label='Unread')
         .d-flex.flex-row.w-100.pb-3.border-bottom
             .justify-content-start
-                .image.mr-3.mt-3(v-if="image", :style='`background-image:url(${image})`')
+                .image.mr-3(v-if="image", :style='`background-image:url(${image})`')
                 .circle.mr-3.rounded-circle.d-flex.align-items-center.justify-content-center.bg-light(v-if="!image")
                     .text-white(v-text="initials")
             .w-100
