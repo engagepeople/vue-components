@@ -43,7 +43,7 @@ export default class Utils {
         currency: ICurrency = this.getCurrency()): string {
 
         const result = []
-        if (typeof amount !== 'undefined') {
+        if (typeof amount === 'number') {
             result.push(NumberFormat(amount, currency.precision))
         }
         if (showLabel) {
