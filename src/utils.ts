@@ -38,12 +38,12 @@ export default class Utils {
     }
 
     public formatCurrency(
-        amount: number | null,
+        amount: number | undefined,
         showLabel: boolean = true,
         currency: ICurrency = this.getCurrency()): string {
 
         const result = []
-        if (amount) {
+        if (typeof amount === 'number') {
             result.push(NumberFormat(amount, currency.precision))
         }
         if (showLabel) {
