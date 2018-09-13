@@ -9,6 +9,8 @@
         return object === undefined? defaultVal : object;
     }
 
+    import { debounce as debounceFn } from '../../directives/debounce'
+
     export default {
         name: 'pd-typeahead',
         props: {
@@ -35,6 +37,10 @@
             id: {
                 type: String
             },
+            debounce: {
+                type: Number,
+                default: 0
+            }
         },
         data() {
             return {
@@ -114,8 +120,16 @@
                 this.query = ''
             },
             onInput() {
-                this.setFilteredItems()
-                this.$emit('onInput', this.query)
+                const action = () => {
+                    this.setFilteredItems()
+                    this.$emit('onInput', this.query)
+                }
+                if (this.debounce) {
+                    debounceFn(action, this.debounce)()
+                } else {
+                    action()
+                }
+
             },
             onKeydown(event) {
                 // handle keyboard navigation within result list
@@ -234,7 +248,7 @@
 
         computed: {
             isEmpty() {
-                if( typeof this.filteredItems === 'undefined'  ) {
+                if ( typeof this.filteredItems === 'undefined' ) {
                     return false
                 } else {
                     return this.filteredItems.length < 1
@@ -252,7 +266,7 @@
                 button.close.ml-3(type='button', aria-label='Remove', @click="removeFromResults(key)")
                     span.text-primary(aria-hidden='true') &times;
             input.border-0.ml-1(
-                autocomplete="off",
+                autocomplete="nope",
                 :id="id",
                 ref="input",
                 type="text",

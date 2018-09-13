@@ -8,15 +8,14 @@
 
 */
 type IDebounceCallBack = (action: Event) => void
+let timeoutID: number
 
 export interface IDebounceBinding {
     value: string
     oldValue: string
 }
 
-const debounce = (fn: IDebounceCallBack, delay: number) => {
-    let timeoutID: number
-    // tslint:disable:no-any
+export const debounce = (fn: IDebounceCallBack, delay: number) => {
     return function(this: HTMLElement): void {
         clearTimeout(timeoutID)
         const args = arguments
