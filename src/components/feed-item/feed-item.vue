@@ -1,32 +1,40 @@
 <script>
-  export default {
-    name: 'pd-feed-item',
-    props: {
-      description: {type: String},
-      date: {type: Date, required: false},
-      unread: {type: Boolean, default: false},
-      title: {type: String},
-      image: {
-        required: false,
-        type: String,
-      },
-    },
-    computed: {
-        initials() {
-            return this.title && this.title.split(' ').slice(0, 2).map(w => w.charAt(0).toUpperCase()).join('')
-        }
+    export default {
+        name: 'pd-feed-item',
+        props: {
+            description: {type: String},
+            date: {type: Date, required: false},
+            unread: {type: Boolean, default: undefined},
+            title: {type: String},
+            image: {
+                required: false,
+                type: String,
+            },
+            imageWidth: {type: Number, default: 100},
+            imageHeight: {type: Number, default: 100}
+        },
+        computed: {
+            initials() {
+                return this.title && this.title.split(' ').slice(0, 2).map(w => w.charAt(0).toUpperCase()).join('')
+            },
+            imageStyle() {
+                return {
+                    width: `${this.imageWidth}px`,
+                    height: `${this.imageHeight}px`
+                }
+            }
+        },
     }
-  }
 
 </script>
 <template lang="pug">
-    .pd-feed-item.d-flex.flex-row.pb-3
-        .d-flex.justify-content-start.mr-3
+    .pd-feed-item.d-flex.flex-row
+        .d-flex.py-2.align-items-center.mr-3(v-if='typeof unread !== "undefined"')
             span.unread.bg-primary.rounded-circle(:class='{invisible: !unread}', title='Unread', aria-label='Unread')
-        .d-flex.flex-row.w-100.pb-3.border-bottom
+        .d-flex.py-2.flex-row.w-100.border-bottom
             .justify-content-start
-                .image.mr-3(v-if="image", :style='`background-image:url(${image})`')
-                .circle.mr-3.rounded-circle.d-flex.align-items-center.justify-content-center.bg-light(v-if="!image")
+                .image.mr-3(v-if="image", :style='[imageStyle, `background-image:url(${image})`]')
+                .circle.mr-3.rounded-circle.d-flex.align-items-center.justify-content-center.bg-light(v-if="!image", :style='imageStyle')
                     .text-white(v-text="initials")
             .w-100
                 slot
@@ -40,8 +48,6 @@
 </template>
 <style scoped>
     .image {
-        width: 100px;
-        height: 100px;
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center center;
@@ -55,7 +61,6 @@
         min-height: 37px
     }
     .unread {
-        margin-top: 45px;
         width: 12px;
         height: 12px;
     }
