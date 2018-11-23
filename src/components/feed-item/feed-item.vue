@@ -29,7 +29,7 @@
 </script>
 <template lang="pug">
     .pd-feed-item.d-flex.flex-row
-        .d-flex.py-2.align-items-center.mr-3(v-if='typeof unread !== "undefined"')
+        .d-flex.py-2.align-items-center.pr-3.border-bottom(v-if='typeof unread !== "undefined"')
             span.unread.bg-primary.rounded-circle(:class='{invisible: !unread}', title='Unread', aria-label='Unread')
         .d-flex.py-2.flex-row.w-100.border-bottom
             .justify-content-start
