@@ -37,7 +37,7 @@ const PodiumComponents = {
         Vue.component('pd-time-ago', pdTimeAgo)
         Vue.component('pd-character-count', pdCharacterCount)
         Vue.component('pd-scroll-top', pdScrollTop)
-        Vue.component('pd-with-window-size', pdWithWindowSize)
+        Vue.component('ep-with-window-size', epWithWindowSize)
         Vue.filter('date', dateFormat)
         Vue.filter('number', numberFormat)
         Vue.filter('timeago', timeAgo)
