@@ -40,19 +40,7 @@ const EngageComponents = {
 
         Vue.mixin({
             beforeCreate(): void {
-                this.engage = {
-                    formatCurrency: (amount: number, showLabel: boolean = true, currency: ICurrency): string => {
-                        return utils.formatCurrency(amount, showLabel, currency)
-                    },
-                    formatNumber: (value: number, decimal: number = 0): string => {
-                        return NumberFormat(value, decimal)
-                    },
-                    getCurrency: (): ICurrency => {
-                        return utils.getCurrency()
-                    },
-                    setCurrency: (name: string, precision: number): void => {
-                        utils.setCurrency(name, precision)
-                    },
+                this.$engage = {
                     setDateFormat: (date: string, time: string): void => {
                         utils.setDateFormat(date, time)
                     },
