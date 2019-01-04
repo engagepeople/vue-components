@@ -11,9 +11,7 @@
       date: {type: Date},
       imageStyle: {
         type: Object,
-        default: () => {
-          return {}
-        }
+        default: () => ({})
       }
     },
     computed: {
