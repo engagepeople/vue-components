@@ -1,6 +1,6 @@
 <script>
   export default {
-    name: 'pd-grid-item',
+    name: 'ep-grid-item',
     props: {
       badge: {type: String},
       image: {
@@ -30,9 +30,9 @@
   }
 </script>
 <template lang="pug">
-    div.mb-5.pd-grid-item
+    div.mb-5.ep-grid-item
         .border.border-light.mb-3.position-relative
-            .pd-grid-badge.bg-primary.text-white.text-truncate(v-text='badge', v-if='badge', :title='badge')
+            .ep-grid-badge.bg-primary.text-white.text-truncate(v-text='badge', v-if='badge', :title='badge')
             img.image(:style='imageStyleComputed' alt='', src='data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==')
             slot(name="image")
         slot
@@ -46,7 +46,7 @@
         background-repeat: no-repeat;
         background-position: center center;
     }
-    .pd-grid-badge {
+    .ep-grid-badge {
         display: inline;
         position: absolute;
         top: 0;

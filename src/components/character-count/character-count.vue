@@ -6,7 +6,7 @@
 </template>
 <script>
     export default {
-        name: 'pd-character-count',
+        name: 'ep-character-count',
         computed: {
             textClass () {
                 if (this.remaining < 0) {

@@ -1,5 +1,5 @@
 <template lang='pug'>
-    #pd-scroll-top(
+    #ep-scroll-top(
     :style="`bottom:${this.bottom}; right:${this.right};`",
     v-show="visible",
     @click="backToTop")
@@ -11,7 +11,7 @@
 
 <script>
     export default {
-        name: 'pd-scroll-top',
+        name: 'ep-scroll-top',
         props: {
             visibleOffset: {
                 type: [String, Number],
@@ -49,7 +49,7 @@
 </script>
 
 <style scoped>
-    #pd-scroll-top{
+    #ep-scroll-top{
         position: fixed;
         z-index: 1000;
         cursor:pointer;

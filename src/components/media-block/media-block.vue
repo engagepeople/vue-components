@@ -24,7 +24,7 @@
         default: 2
       }
     },
-    name: 'pd-media-block',
+    name: 'ep-media-block',
     computed: {
       columnsClass () {
         return {

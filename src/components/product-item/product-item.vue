@@ -1,6 +1,6 @@
 <script>
   export default {
-    name: 'pd-product-item',
+    name: 'ep-product-item',
     computed: {
       hasRange () {
         return this.price < this.priceMax
@@ -36,8 +36,8 @@
   }
 </script>
 <template lang="pug">
-    div.pd-product-item
-        pd-grid-item(:image="heroImage", :badge='badge')
+    div.ep-product-item
+        ep-grid-item(:image="heroImage", :badge='badge')
             template(slot='image')
                 .crop-panel(v-if="swatches")
                     .swatch.border.border-light(v-for="(i) in swatches", @mouseover="heroImage = i.image", :style='`background-color:${i.color}`')
@@ -46,8 +46,8 @@
             h6.text-primary.truncate(v-text='title')
             .mb-0(v-if='hasRange') Starting from
             h4.primary.mb-0
-                pd-currency(:amount="price", :show-label="false")
-            pd-currency()
+                ep-currency(:amount="price", :show-label="false")
+            ep-currency()
 
 </template>
 <style scoped>
