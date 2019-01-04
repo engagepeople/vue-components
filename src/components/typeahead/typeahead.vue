@@ -10,7 +10,7 @@
     }
 
     export default {
-        name: 'pd-typeahead',
+        name: 'ep-typeahead',
         props: {
             items: {
                 required: true,
@@ -245,7 +245,7 @@
     }
 </script>
 <template lang="pug">
-    .pd-typeahead
+    .ep-typeahead
         .border.border-light.p-0.d-flex.flex-wrap
             .result-block.border.border-primary.py-0.px-3.m-1.d-flex.align-items-center(v-for="(item, key) in results", :key="key")
                 .label(v-text="$scopedSlots['result-text'] ? $scopedSlots['result-text']({item})[0].text : item[internalKeys.resultLabel]")

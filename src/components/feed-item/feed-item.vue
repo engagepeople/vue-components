@@ -1,6 +1,6 @@
 <script>
   export default {
-    name: 'pd-feed-item',
+    name: 'ep-feed-item',
     props: {
       image: {
         type: String,
@@ -30,7 +30,7 @@
 
 </script>
 <template lang="pug">
-    .pd-feed-item.d-flex.flex-row
+    .ep-feed-item.d-flex.flex-row
         .d-flex.py-2.align-items-center.pr-3.border-bottom(v-if='typeof unread !== "undefined"')
             span.unread.bg-primary.rounded-circle(:class='{invisible: !unread}', title='Unread', aria-label='Unread')
         .d-flex.py-2.flex-row.w-100.border-bottom
@@ -46,7 +46,7 @@
                         slot(name="description")
                     div
                         small
-                            pd-time-ago.text-dark(v-if='date', :date='date')
+                            ep-time-ago.text-dark(v-if='date', :date='date')
 </template>
 <style scoped>
     .image {

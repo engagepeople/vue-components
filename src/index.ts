@@ -1,16 +1,14 @@
 // tslint:disable:no-any
-import pdAlert from './components/alert/alert.vue'
-import pdBadgeCount from './components/badge-count/badge-count.vue'
-import pdCurrency from './components/currency/currency.vue'
-import pdDate from './components/date/date.vue'
-import pdFeedItem from './components/feed-item/feed-item.vue'
-import pdGridItem from './components/grid-item/grid-item.vue'
-import pdMediaBlock from './components/media-block/media-block.vue'
-import pdProductItem from './components/product-item/product-item.vue'
+import epAlert from './components/alert/alert.vue'
+import epDate from './components/date/date.vue'
+import epFeedItem from './components/feed-item/feed-item.vue'
+import epGridItem from './components/grid-item/grid-item.vue'
+import epMediaBlock from './components/media-block/media-block.vue'
+import epProductItem from './components/product-item/product-item.vue'
 import typeahead from './components/typeahead/typeahead.vue'
-import pdTimeAgo from './components/time-ago/time-ago.vue'
-import pdCharacterCount from './components/character-count/character-count.vue'
-import pdScrollTop from './components/scroll-top/scroll-top.vue'
+import epTimeAgo from './components/time-ago/time-ago.vue'
+import epCharacterCount from './components/character-count/character-count.vue'
+import epScrollTop from './components/scroll-top/scroll-top.vue'
 import dateFormat from './filters/DateFormatFilter'
 import numberFormat from './filters/NumberFormat'
 import timeAgo from './filters/TimeAgo'
@@ -21,21 +19,19 @@ import {ICurrency} from '../types'
 import NumberFormat from './filters/NumberFormat'
 
 const utils = Utils.Instance
-const PodiumComponents = {
+const EngageComponents = {
 // tslint:disable:no-any
     install(Vue: any): void {
-        Vue.component('pd-alert', pdAlert)
-        Vue.component('pd-badge-count', pdBadgeCount)
-        Vue.component('pd-currency', pdCurrency)
-        Vue.component('pd-date', pdDate)
-        Vue.component('pd-feed-item', pdFeedItem)
-        Vue.component('pd-grid-item', pdGridItem)
-        Vue.component('pd-media-block', pdMediaBlock)
-        Vue.component('pd-product-item', pdProductItem)
-        Vue.component('pd-typeahead', typeahead)
-        Vue.component('pd-time-ago', pdTimeAgo)
-        Vue.component('pd-character-count', pdCharacterCount)
-        Vue.component('pd-scroll-top', pdScrollTop)
+        Vue.component('ep-alert', epAlert)
+        Vue.component('ep-date', epDate)
+        Vue.component('ep-feed-item', epFeedItem)
+        Vue.component('ep-grid-item', epGridItem)
+        Vue.component('ep-media-block', epMediaBlock)
+        Vue.component('ep-product-item', epProductItem)
+        Vue.component('ep-typeahead', typeahead)
+        Vue.component('ep-time-ago', epTimeAgo)
+        Vue.component('ep-character-count', epCharacterCount)
+        Vue.component('ep-scroll-top', epScrollTop)
         Vue.filter('date', dateFormat)
         Vue.filter('number', numberFormat)
         Vue.filter('timeago', timeAgo)
@@ -44,7 +40,7 @@ const PodiumComponents = {
 
         Vue.mixin({
             beforeCreate(): void {
-                this.$podium = {
+                this.engage = {
                     formatCurrency: (amount: number, showLabel: boolean = true, currency: ICurrency): string => {
                         return utils.formatCurrency(amount, showLabel, currency)
                     },
@@ -60,13 +56,10 @@ const PodiumComponents = {
                     setDateFormat: (date: string, time: string): void => {
                         utils.setDateFormat(date, time)
                     },
-                    setPageTitle: (title: string): void => {
-                        document.title = title
-                    },
                 }
             },
         })
     },
 }
 
-export default PodiumComponents
+export default EngageComponents

@@ -4,7 +4,7 @@
 
   const utils = Utils.Instance
   export default {
-    name: 'pd-date',
+    name: 'ep-date',
     computed: {
       datetime () {
         return DateFilter(this.date, 'isoDateTime')
@@ -47,5 +47,5 @@
   }
 </script>
 <template lang="pug">
-    time.pd-date(:datetime='datetime', v-text='build')
+    time.ep-date(:datetime='datetime', v-text='build')
 </template>

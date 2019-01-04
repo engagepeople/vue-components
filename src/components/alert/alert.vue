@@ -1,6 +1,6 @@
 <script>
   export default {
-    name: 'pd-alert',
+    name: 'ep-alert',
     props: {
       title: {
         default: '',
@@ -14,7 +14,7 @@
   }
 </script>
 <template lang="pug">
-    .pd-alert
+    .ep-alert
         .mb-4
             .alert.mb-0(role='alert', :class='[{withslot: $slots.default}, `alert-${variant}`]')
                 h3.alert-heading.mb-0.d-flex.align-items-center.justify-content-center.flex-wrap
@@ -38,7 +38,7 @@
                     span.text-center
                         slot(name='title')
                             span(v-text='title')
-            .link.text-center.px-4.py-3.bg-white.border-top-0(:class="`alert-${this.variant}`", v-if="$slots.default")
+            .link.text-center.px-4.py-3.bg-white.border-top-0(:class='`alert-${this.variant}`', v-if='$slots.default')
                 slot
 </template>
 <style scoped>
