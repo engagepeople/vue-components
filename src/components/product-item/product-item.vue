@@ -62,7 +62,7 @@
     }
     .crop-panel {
         position: absolute;
-        bottom: 0px;
+        bottom: 0;
         padding: 10px;
         width: 100%;
     }

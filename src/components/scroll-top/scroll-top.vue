@@ -55,7 +55,7 @@
         cursor:pointer;
     }
     .transparent-white-bg {
-        background: rgba(255,255,255,0.7);
+        background: rgba(255, 255, 255, 0.7);
     }
     .hat {
         font-size: 17px;

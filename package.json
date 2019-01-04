@@ -1,7 +1,7 @@
 {
-  "name": "podium-vue-components",
+  "name": "engage-vue-components",
   "version": "0.0.15",
-  "description": "Podium Client Components Library",
+  "description": "Engage Components Library",
   "keywords": [
     "loyalty",
     "reward",
@@ -24,7 +24,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/engagepeople/podium-vue-components.git"
+    "url": "git+https://github.com/engagepeople/vue-components.git"
   },
   "files": [
     "dist/*.js",

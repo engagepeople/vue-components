@@ -3,9 +3,9 @@
 ## Settings up Environment
 
 To used the source code
-- Run `npm dev` from the `podium-vue-components` folder to start TS watch 
-- Run `npm link` from the `podium-vue-components` `package.json` folder  
-- Run `npm link `podium-vue-components`  from the package you are developing in
+- Run `npm dev` from the `engage-vue-components` folder to start TS watch 
+- Run `npm link` from the `engage-vue-components` `package.json` folder  
+- Run `npm link engage-vue-components` from the package you are developing in
 
 - Restart of your dev server maybe required
 

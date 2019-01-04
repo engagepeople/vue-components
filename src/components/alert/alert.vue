@@ -10,13 +10,22 @@
         default: 'success',
         type: String,
       },
+    },
+    computed: {
+      alertClass () {
+        let classes = [`alert-${this.variant}`]
+        if (this.$slots.default) {
+          classes.push('withslot')
+        }
+        return classes
+      }
     }
   }
 </script>
 <template lang="pug">
     .pd-alert
         .mb-4
-            .alert.alert-primary.mb-0(role="alert", :class="`alert-${this.variant}`")
+            .alert.mb-0(role='alert', :class='alertClass')
                 h3.alert-heading.mb-0.d-flex.align-items-center.justify-content-center.flex-wrap
                     .mx-3
                         svg(
@@ -46,14 +55,21 @@
         border-width: 1px;
         border-style: solid;
     }
+
     .alert-heading svg {
         width: 41px;
         height: 41px;
     }
+
     .alert-heading svg .success {
         fill: none;
         stroke: #00b194;
         stroke-miterlimit: 10;
+    }
+
+    .alert.withslot {
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
     }
 
     .alert-heading svg .alert {
