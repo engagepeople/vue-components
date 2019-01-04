@@ -11,21 +11,12 @@
         type: String,
       },
     },
-    computed: {
-      alertClass () {
-        let classes = [`alert-${this.variant}`]
-        if (this.$slots.default) {
-          classes.push('withslot')
-        }
-        return classes
-      }
-    }
   }
 </script>
 <template lang="pug">
     .pd-alert
         .mb-4
-            .alert.mb-0(role='alert', :class='alertClass')
+            .alert.mb-0(role='alert', :class='[{withslot: $slots.default}, `alert-${variant}`]')
                 h3.alert-heading.mb-0.d-flex.align-items-center.justify-content-center.flex-wrap
                     .mx-3
                         svg(
